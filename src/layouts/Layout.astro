@@ -17,7 +17,7 @@ const {
   lang = 'en'
 } = Astro.props;
 
-const siteUrl = 'http://localhost:4321'; // 後で実際のドメインに変更
+const siteUrl = 'https://astro-portfolio-mu-ochre.vercel.app';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const ogImageUrl = new URL(image, siteUrl).href;
 ---
