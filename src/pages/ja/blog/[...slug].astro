@@ -1,0 +1,61 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import { useTranslations } from "../../../i18n/utils";
+
+const t = useTranslations("ja");
+
+export async function getStaticPaths() {
+    const posts = await getCollection(
+        "blog",
+        ({ data }) => data.lang === "ja" && !data.draft,
+    );
+    return posts.map((post) => ({
+        params: { slug: post.id.replace("ja/", "").replace(".md", "") },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout
+    title={`${post.data.title} | Kyoshiro`}
+    description={post.data.description}
+    lang="ja"
+>
+    <main class="bg-gray-900 text-white min-h-screen py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <a
+                href="/ja/blog"
+                class="text-blue-400 hover:underline mb-8 inline-block"
+            >
+                {t("back.blog")}
+            </a>
+
+            <article>
+                <time class="text-gray-400">
+                    {post.data.pubDate.toLocaleDateString("ja-JP")}
+                </time>
+                <h1 class="text-4xl font-bold mt-2 mb-4">{post.data.title}</h1>
+
+                {
+                    post.data.tags && (
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            {post.data.tags.map((tag) => (
+                                <span class="bg-gray-700 text-sm px-2 py-1 rounded">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                    )
+                }
+
+                <div class="prose prose-invert max-w-none">
+                    <Content />
+                </div>
+            </article>
+        </div>
+    </main>
+</Layout>

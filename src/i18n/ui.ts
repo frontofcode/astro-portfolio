@@ -1,0 +1,53 @@
+export const languages = {
+    en: 'English',
+    ja: '日本語',
+};
+
+export const defaultLang = 'en';
+
+export const ui = {
+    en: {
+        'nav.home': 'Home',
+        'nav.projects': 'Projects',
+        'nav.blog': 'Blog',
+        'nav.about': 'About',
+        'nav.contact': 'Contact',
+        'hero.title': 'Kyoshiro',
+        'hero.subtitle': 'WordPress & Modern Web Developer',
+        'hero.cta.projects': 'View Projects',
+        'hero.cta.contact': 'Contact Me',
+        'skills.title': 'Skills',
+        'about.title': 'About Me',
+        'about.description': 'A freelance web developer based in Kobe, Japan. With over 5 years of experience in WordPress, I handle everything from EC sites to corporate websites. Currently expanding into modern tech stacks like Astro.',
+        'contact.title': 'Contact',
+        'contact.description': 'Feel free to reach out for work inquiries.',
+        'contact.available': 'Currently available for new projects',
+        'contact.response': 'Usually respond within 1-2 business days',
+        'projects.title': 'Projects',
+        'blog.title': 'Blog',
+        'back.projects': '← Back to Projects',
+        'back.blog': '← Back to Blog',
+    },
+    ja: {
+        'nav.home': 'ホーム',
+        'nav.projects': '実績',
+        'nav.blog': 'ブログ',
+        'nav.about': '自己紹介',
+        'nav.contact': 'お問い合わせ',
+        'hero.title': 'Kyoshiro',
+        'hero.subtitle': 'WordPress & モダンWeb開発者',
+        'hero.cta.projects': '実績を見る',
+        'hero.cta.contact': 'お問い合わせ',
+        'skills.title': 'スキル',
+        'about.title': '自己紹介',
+        'about.description': '神戸を拠点に活動するフリーランスのWeb制作者です。WordPressを中心に5年以上の経験があり、ECサイト構築からコーポレートサイトまで幅広く対応しています。現在はAstroなどモダンな技術スタックにも取り組んでいます。',
+        'contact.title': 'お問い合わせ',
+        'contact.description': 'お仕事のご依頼・ご相談はお気軽にどうぞ。',
+        'contact.available': '現在、新規案件を受付中です',
+        'contact.response': '通常1〜2営業日以内に返信いたします',
+        'projects.title': '実績',
+        'blog.title': 'ブログ',
+        'back.projects': '← 実績一覧に戻る',
+        'back.blog': '← ブログ一覧に戻る',
+    },
+} as const;

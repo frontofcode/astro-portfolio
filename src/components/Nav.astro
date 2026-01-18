@@ -1,0 +1,59 @@
+---
+import { getLangFromUrl, useTranslations, getLocalePath } from '../i18n/utils';
+import { languages } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const currentPath = Astro.url.pathname;
+
+function getPathWithoutLang(path: string) {
+  const segments = path.split('/').filter(Boolean);
+  if (segments[0] === 'ja') {
+    return '/' + segments.slice(1).join('/') || '/';
+  }
+  return path;
+}
+
+const pathWithoutLang = getPathWithoutLang(currentPath);
+
+const navItems = [
+  { href: '/', label: t('nav.home'), isActive: pathWithoutLang === '/' },
+  { href: '/projects', label: t('nav.projects'), isActive: pathWithoutLang.startsWith('/projects') },
+  { href: '/blog', label: t('nav.blog'), isActive: pathWithoutLang.startsWith('/blog') },
+  { href: '/about', label: t('nav.about'), isActive: pathWithoutLang === '/about' },
+  { href: '/contact', label: t('nav.contact'), isActive: pathWithoutLang === '/contact' },
+];
+
+const langItems = Object.entries(languages).map(([code, label]) => ({
+  code,
+  label,
+  href: code === 'en' ? pathWithoutLang : `/${code}${pathWithoutLang}`,
+  isActive: lang === code,
+}));
+
+function getNavClass(isActive: boolean) {
+  return isActive ? 'text-white hover:underline underline' : 'text-white hover:underline';
+}
+
+function getLangClass(isActive: boolean) {
+  return isActive ? 'px-2 py-1 rounded text-sm bg-blue-600 text-white' : 'px-2 py-1 rounded text-sm text-gray-400 hover:text-white';
+}
+---
+
+<nav class="flex items-center justify-between p-4 bg-gray-800">
+  <div class="flex gap-6">
+    {navItems.map((item) => (
+      <a href={getLocalePath(lang, item.href)} class={getNavClass(item.isActive)}>
+        {item.label}
+      </a>
+    ))}
+  </div>
+  
+  <div class="flex gap-2">
+    {langItems.map((item) => (
+      <a href={item.href} class={getLangClass(item.isActive)}>
+        {item.label}
+      </a>
+    ))}
+  </div>
+</nav>

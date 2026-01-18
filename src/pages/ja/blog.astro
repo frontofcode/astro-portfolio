@@ -1,0 +1,58 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import { useTranslations } from "../../i18n/utils";
+
+const t = useTranslations("ja");
+const posts = await getCollection(
+    "blog",
+    ({ data }) => data.lang === "ja" && !data.draft,
+);
+const sortedPosts = posts.sort(
+    (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+---
+
+<Layout
+    title="ブログ | Kyoshiro"
+    description="Web制作、WordPressの技術情報、モダンフロントエンド技術についての記事。"
+    lang="ja"
+>
+    <main class="bg-gray-900 text-white min-h-screen py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl font-bold text-center mb-12">
+                {t("blog.title")}
+            </h1>
+
+            <div class="flex flex-col gap-8">
+                {
+                    sortedPosts.map((post) => (
+                        <a
+                            href={`/ja/blog/${post.id.replace("ja/", "").replace(".md", "")}`}
+                            class="block bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-colors"
+                        >
+                            <time class="text-gray-400 text-sm">
+                                {post.data.pubDate.toLocaleDateString("ja-JP")}
+                            </time>
+                            <h2 class="text-2xl font-bold mt-2 mb-2">
+                                {post.data.title}
+                            </h2>
+                            <p class="text-gray-400 mb-4">
+                                {post.data.description}
+                            </p>
+                            {post.data.tags && (
+                                <div class="flex flex-wrap gap-2">
+                                    {post.data.tags.map((tag) => (
+                                        <span class="bg-gray-700 text-sm px-2 py-1 rounded">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
+                        </a>
+                    ))
+                }
+            </div>
+        </div>
+    </main>
+</Layout>

@@ -1,11 +1,64 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { useTranslations } from "../i18n/utils";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const t = useTranslations("en");
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+	title="Kyoshiro | Web Developer"
+	description="Freelance web developer based in Kobe, Japan. Specializing in WordPress, E-commerce, and modern web technologies."
+>
+	<main>
+		<section
+			class="min-h-screen flex items-center justify-center bg-gray-900 text-white px-4"
+		>
+			<div class="text-center">
+				<h1 class="text-5xl font-bold mb-4">{t("hero.title")}</h1>
+				<p class="text-xl text-gray-300 mb-8">{t("hero.subtitle")}</p>
+				<div class="flex gap-4 justify-center">
+					<a
+						href="/projects"
+						class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-medium"
+					>
+						{t("hero.cta.projects")}
+					</a>
+					<a
+						href="/contact"
+						class="border border-white hover:bg-white hover:text-gray-900 px-6 py-3 rounded-lg font-medium"
+					>
+						{t("hero.cta.contact")}
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="py-20 px-4 bg-gray-800 text-white">
+			<div class="max-w-4xl mx-auto">
+				<h2 class="text-3xl font-bold text-center mb-12">
+					{t("skills.title")}
+				</h2>
+				<div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+					<div class="p-4">
+						<p class="text-2xl font-bold text-blue-400">
+							WordPress
+						</p>
+						<p class="text-gray-400">Theme & Plugin</p>
+					</div>
+					<div class="p-4">
+						<p class="text-2xl font-bold text-blue-400">Astro</p>
+						<p class="text-gray-400">Static Sites</p>
+					</div>
+					<div class="p-4">
+						<p class="text-2xl font-bold text-blue-400">EC</p>
+						<p class="text-gray-400">Shopify / WooCommerce</p>
+					</div>
+					<div class="p-4">
+						<p class="text-2xl font-bold text-blue-400">Tailwind</p>
+						<p class="text-gray-400">CSS Framework</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
 </Layout>
